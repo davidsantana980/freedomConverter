@@ -20,10 +20,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //Index page (static HTML)
-app.route('/')
-  .get(function (req, res) {
-    res.sendFile(process.cwd() + '/views/index.html');
-  });
+app.get('/', (req, res) => {
+  res.sendFile(process.cwd() + '/views/index.html');
+});
 
 //For FCC testing purposes
 fccTestingRoutes(app);
@@ -32,7 +31,7 @@ fccTestingRoutes(app);
 apiRoutes(app);  
     
 //404 Not Found Middleware
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   res.status(404)
     .type('text')
     .send('Not Found');
