@@ -18,15 +18,24 @@ module.exports = function (app) {
       let input = req.query.input; 
 
       let num = convertHandler.getNum(input); 
-      
       let unit = convertHandler.getUnit(input);
+
+      if(!num && !unit){
+        return res.send("invalid number and unit")
+      }
+  
+      if(!num){
+        return res.send("invalid number")
+      }
+  
+      if(!unit){
+        return res.send("invalid unit")
+      }
 
       let returnNum = convertHandler.convert(num, unit);
       let returnUnit = convertHandler.getReturnUnit(unit);
 
-      let message = convertHandler.getString(num, unit, returnNum, returnUnit);
-
-      return res.send(message)
+      return res.send(convertHandler.getString(num, unit, returnNum, returnUnit))
     }
     return res.redirect("/")
   })

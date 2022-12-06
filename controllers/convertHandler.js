@@ -24,11 +24,11 @@ function ConvertHandler() {
   this.getUnit = (input) => {
     let result = input.replace(/[^a-zA-Z]/g, '')
 
-    if(/(gal|lbs|kg|mi|km)/gi.test(result)){
+    if(/^(gal|lbs|kg|mi|km)$/gi.test(result)){
       return result.toLowerCase();
     }
     
-    if(/l/gi.test(result)){
+    if(/^l$/gi.test(result)){
       return result.toUpperCase();
     }
 
